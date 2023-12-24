@@ -1,7 +1,6 @@
-import React from "react";
+import React, {useContext} from "react";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import Avatar from "@mui/material/Avatar";
-import Brand from "../../../img/indian.png";
 import CallIcon from "@mui/icons-material/Call";
 import VideocamIcon from "@mui/icons-material/Videocam";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -10,7 +9,22 @@ import AttachFileIcon from "@mui/icons-material/AttachFile";
 import SendIcon from "@mui/icons-material/Send";
 import IconButton from "@mui/material/IconButton";
 
+
+
+import { AuthContext } from "../../context/AuthContext";
+
+
+
+
+
+
+
+
 const UsersChat = () => {
+  const { currentUser } = useContext(AuthContext);
+
+
+
   return (
     <div className="bg-gray-200 w-full block">
       <div className="flex flex-row items-center py-5 bg-gray-900 justify-between">
@@ -22,7 +36,7 @@ const UsersChat = () => {
           </div>
           <div className="flex gap-4 item-center">
             <Avatar
-              src={Brand}
+              src={currentUser.photoURL}
               sx={{ bgcolor: "white", height: "50px", width: "50px" }}
             />
             <div>
@@ -75,7 +89,6 @@ const UsersChat = () => {
                 ":hover": {
                   color: "#00447c",
                 },
-                ":hover": { color: "green" },
               }}
               className="text-gray-900"
             />

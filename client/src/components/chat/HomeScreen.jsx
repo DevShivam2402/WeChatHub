@@ -1,5 +1,5 @@
 import React from 'react'
-import SideNav from "../../../components/SideNav";
+import SideNav from "../SideNav";
 import UserChatList from './UserChatList'
 import UsersChat from './UsersChat'
 

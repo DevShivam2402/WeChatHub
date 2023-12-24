@@ -1,16 +1,16 @@
 import React from "react";
-import SideNav from "../../../components/SideNav";
+import SideNav from "../SideNav";
 import UserChatList from "../chat/UserChatList";
-import AFmain from "./AFmain";
+import VideoMain from "./VideoMain";
 
-const AddFrndScreen = () => {
+const VideoScreen = () => {
   return (
     <div className="flex flex-row ">
       <SideNav />
       <UserChatList />
-      <AFmain />
+      <VideoMain />
     </div>
   );
 };
 
-export default AddFrndScreen;
+export default VideoScreen;

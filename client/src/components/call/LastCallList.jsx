@@ -1,14 +1,20 @@
-import React from 'react'
+import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import SortIcon from "@mui/icons-material/Sort";
 import IconButton from "@mui/material/IconButton";
 import Avatar from "@mui/material/Avatar";
-import Brand from "../../../img/indian.png";
+import { AuthContext } from "../../context/AuthContext";
 
 
 
 
-const UserChatList = () => {
+
+
+const LastCallList = () => {
+  const { currentUser } = useContext(AuthContext);
+
+
+
   return (
     <div className="bg-gray-100 w-1/3 h-screen">
       <div className="">
@@ -28,16 +34,13 @@ const UserChatList = () => {
       </div>
 
       {/* // TODO: provide backend */}
-      <div className="flex flex-col bg-blue-100 pl-6 py-2 hover:bg-blue-700  ">
-        <div className="flex gap-4 item-center ">
+      <div className="flex flex-col bg-blue-100 pl-6 py-2">
+        <div className="flex gap-4 item-center">
           <Avatar
-            src={Brand}
+            src={currentUser.photoURL}
             sx={{ bgcolor: "white", height: "50px", width: "50px" }}
           />
-          <div className="hover:text-white
-          
-          
-           ">
+          <div>
             <div className="leading-tight w-full p-1 justify-between">
               <h3 className="font-semibold">Shivam sharma</h3>
               <p>hi where are you?</p>
@@ -49,4 +52,4 @@ const UserChatList = () => {
   );
 };
 
-export default UserChatList;
+export default LastCallList;

@@ -1,15 +1,18 @@
-import React  from "react";
-import Brand from "../img/indian.png";
+import React , {useContext} from "react";
 import IconButton from "@mui/material/IconButton";
 import ChatIcon from "@mui/icons-material/Chat";
 import AddIcCallIcon from "@mui/icons-material/AddIcCall";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import VideoCameraFrontIcon from "@mui/icons-material/VideoCameraFront";
 import { Link } from "react-router-dom";
-import Switch from "@mui/material/Switch";
-import { styled } from "@mui/material/styles";
+// import Switch from "@mui/material/Switch";
+// import { styled } from "@mui/material/styles";
 import SettingsIcon from "@mui/icons-material/Settings";
+import LogoutIcon from "@mui/icons-material/Logout";
 
+import { auth } from "../firbase";
+import { signOut } from "firebase/auth";
+import { AuthContext } from "../context/AuthContext";
 
 
 
@@ -70,14 +73,20 @@ const SideNav = () => {
 // const toggle = () => {
 // setIsDarkTheme((prevTheme) => !prevTheme);
 // };
+
+
+const { currentUser } = useContext(AuthContext);
+
+
+
   return (
     <div className="flex flex-col py-3 pb-3 justify-between gap-2  bg-gray-900 w-18 min-w-fit h-screen text-white">
       <div className="intems-center flex flex-col">
         <div className=" gap-5">
-          <Link to="/homescreen">
+          <Link to="/">
             <IconButton>
               <img
-                src={Brand}
+                src={currentUser.photoURL}
                 color="primary"
                 className=" bg-gray-100 ml-1 mb-5 jitems-center rounded-lg h-10 w-10"
                 alt="img"
@@ -129,6 +138,22 @@ const SideNav = () => {
               onChange={toggle}
             />
           </div> */}
+        <div className="m-auto h-10 justify-center rounded-lg ">
+          <IconButton
+            sx={{ color: "white" }}
+            aria-label="logout"
+            onClick={() => signOut(auth)}
+          >
+            <LogoutIcon
+              sx={{
+                display: "flex",
+                justifyItems: "center",
+                color: "white",
+                ":hover": { color: "#FCA311" },
+              }}
+            />
+          </IconButton>
+        </div>
         <div className="m-auto h-10 justify-center rounded-lg ">
           <Link to="/settingscreen">
             <IconButton sx={{ color: "white" }}>

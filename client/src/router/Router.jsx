@@ -1,24 +1,71 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+
+
+
+//path of files-----
 import SignIn from '../pages/SignIn.jsx'
 import SignUp from '../pages/SignUp.jsx'
-import SideNav from '../components/SideNav.jsx'
-import HomeScreen from '../layout/component/chat/HomeScreen.jsx'
-import CallScreen from '../layout/component/call/CallScreen.jsx'
-import VideoScreen from '../layout/component/video/VideoScreen.jsx'
-import AddFrndScreen from '../layout/component/addFriend/AddFrndScreen.jsx'
+import HomeScreen from '../components/chat/HomeScreen.jsx'
+import CallScreen from '../components/call/CallScreen.jsx'
+import VideoScreen from '../components/video/VideoScreen.jsx'
+
+
+
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext.jsx";
+
 
 const Router = () => {
+
+
+
+  const { currentUser } = useContext(AuthContext);
+
+  const ProtectedRoute = ({ children }) => {
+    if (!currentUser) {
+      return <Navigate to="/login" />;
+    }
+
+    return children;
+  };
+
+
+
+
     return (
       <BrowserRouter>
-        <Routes>
-          <Route index path="/" element={<SignIn />} />
-          <Route index path="/nav" element={<SideNav />} />
-          <Route index path="/homescreen" element={<HomeScreen />} />
-          <Route index path="/callscreen" element={<CallScreen />} />
-          <Route index path="/videocallscreen" element={<VideoScreen />} />
-          <Route index path="/addfriendscreen" element={<AddFrndScreen />} />
-          <Route index path="/register" element={<SignUp />} />
+        <Routes path="/">
+          <Route path="/login" element={<SignIn />} />
+          <Route path="/register" element={<SignUp />} />
+
+         
+
+          <Route
+            index
+            element={
+              <ProtectedRoute>
+                <HomeScreen />
+              </ProtectedRoute>
+            }
+          />
+          <Route index path="/callscreen" element={
+            <ProtectedRoute>
+           <CallScreen />
+              </ProtectedRoute>
+        } />
+          <Route index path="/videocallscreen" element={
+            <ProtectedRoute>
+             <VideoScreen />
+              </ProtectedRoute>
+          } />
+          {/* <Route index path="/addfriendscreen" element={
+          
+            <ProtectedRoute>
+             <AddFrndScreen />
+              </ProtectedRoute>
+          } /> */}
         </Routes>
       </BrowserRouter>
     );
